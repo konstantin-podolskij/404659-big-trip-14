@@ -1,7 +1,7 @@
 # Проект «Большое путешествие»
 
 * Студент: [Константин Подольский](https://up.htmlacademy.ru/ecmascript/14/user/404659).
-* Наставник: `Неизвестно`.
+* Наставник: [Денис Горшков](https://htmlacademy.ru/profile/satrasmatras).
 
 ---
 
