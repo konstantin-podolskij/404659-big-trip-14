@@ -7,35 +7,39 @@ import {createEventsListTemplate} from './view/events-list.js';
 import {createEventTemplate} from './view/event.js';
 import {createFormAddTemplate} from './view/form-add.js';
 import {createFormEditTemplate} from './view/form-edit.js';
+import {render} from './utils/utils.js';
 
 const EVENT_COUNT = 3;
 
-const render = (container, template, place) => {
-  container.insertAdjacentHTML(place, template);
+const elem_position = {
+  BEFORE_BEGIN: 'beforebegin',
+  AFTER_BEGIN: 'afterbegin',
+  BEFORE_END: 'beforeend',
+  AFTER_END: 'afterend',
 };
 
 const siteHeaderElement = document.querySelector('.page-header');
 const tripMainElement = siteHeaderElement.querySelector('.trip-main');
-render(tripMainElement, createTripInfoTemplate(), 'afterbegin');
+render(tripMainElement, createTripInfoTemplate(), elem_position.AFTER_BEGIN);
 
 const menuElement = siteHeaderElement.querySelector('.trip-controls__navigation');
-render(menuElement, createMenuTemplate(), 'beforeend');
+render(menuElement, createMenuTemplate(), elem_position.BEFORE_END);
 
 const tripCostElement = siteHeaderElement.querySelector('.trip-info');
-render(tripCostElement, createTripCostTemplate(), 'beforeend');
+render(tripCostElement, createTripCostTemplate(), elem_position.BEFORE_END);
 
 const filtersElement = siteHeaderElement.querySelector('.trip-controls__filters');
-render(filtersElement, createFiltersTemplate(), 'beforeend');
+render(filtersElement, createFiltersTemplate(), elem_position.BEFORE_END);
 
 const mainElement = document.querySelector('.page-main');
 const tripEventsElement = mainElement.querySelector('.trip-events');
-render(tripEventsElement, createSortTemplate(), 'beforeend');
-render(tripEventsElement, createEventsListTemplate(), 'beforeend');
+render(tripEventsElement, createSortTemplate(), elem_position.BEFORE_END);
+render(tripEventsElement, createEventsListTemplate(), elem_position.BEFORE_END);
 
 const eventsListElement = tripEventsElement.querySelector('.trip-events__list');
-render(eventsListElement, createFormEditTemplate(), 'beforeend');
-render(eventsListElement, createFormAddTemplate(), 'beforeend');
+render(eventsListElement, createFormEditTemplate(), elem_position.BEFORE_END);
+render(eventsListElement, createFormAddTemplate(), elem_position.BEFORE_END);
 
 for (let i = 0; i < EVENT_COUNT; i++) {
-  render(eventsListElement, createEventTemplate(), 'beforeend');
+  render(eventsListElement, createEventTemplate(), elem_position.BEFORE_END);
 }
