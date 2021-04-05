@@ -8,8 +8,7 @@ import {createEventTemplate} from './view/event.js';
 import {createFormAddTemplate} from './view/form-add.js';
 import {createFormEditTemplate} from './view/form-edit.js';
 import {render} from './utils/utils.js';
-
-const EVENT_COUNT = 3;
+import {EVENT_COUNT} from './utils/constants.js';
 
 const elem_position = {
   BEFORE_BEGIN: 'beforebegin',
