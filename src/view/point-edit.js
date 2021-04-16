@@ -1,52 +1,35 @@
 import dayjs from 'dayjs';
 import {DESTINATIONS} from '../utils/constants.js';
-import {getRandomInteger} from '../utils/utils.js';
-
-function createDestinationDatalistTemplate(destinations) {
-  let optionsMarkup = '';
-  destinations.forEach((destination) => {
-    optionsMarkup += `<option value="${destination}"></option>`;
-  });
-  return optionsMarkup;
-}
-
-function createOptionOffersTemplate(options) {
-  if (!options.length) {
-    return '';
-  }
-
-  let optionsMarkup = '';
-  options.forEach((option, index) => {
-    const isChecked  = getRandomInteger(0, 1) ? 'checked' : '';
-    const id = `event-offer-${option.title.toLowerCase().split(' ').join('-')}-${index + 1}`;
-
-    optionsMarkup += `<div class="event__offer-selector">
-    <input class="event__offer-checkbox  visually-hidden" id="${id}" type="checkbox" name="${id}" ${isChecked}>
-    <label class="event__offer-label" for="${id}">
-      <span class="event__offer-title">${option.title}</span>
-      &plus;&euro;&nbsp;
-      <span class="event__offer-price">${option.price}</span>
-    </label>
-  </div>`;
-  });
-
-  return `<section class="event__section  event__section--offers">
-      <h3 class="event__section-title  event__section-title--offers">Offers</h3>
-
-      <div class="event__available-offers">
-      ${optionsMarkup}
-      </div>
-    </section>`;
-}
+import {DateFormat} from '../utils/constants.js';
+import {createDestinationDatalistTemplate} from '../view/destinations-list.js';
+import {createOptionOffersTemplate} from '../view/option.js';
 
 export const createFormEditTemplate = (point) => {
+  const {
+    offer: {
+      type,
+      options,
+    },
+    destination: {
+      name,
+      description,
+    },
+    data: {
+      date:{
+        from,
+        to,
+      },
+      price,
+    },
+  } = point;
+
   return `<li class="trip-events__item">
     <form class="event event--edit" action="#" method="post">
       <header class="event__header">
         <div class="event__type-wrapper">
           <label class="event__type  event__type-btn" for="event-type-toggle-1">
             <span class="visually-hidden">Choose event type</span>
-            <img class="event__type-icon" width="17" height="17" src="img/icons/${point.offer.type}.png" alt="Event type icon">
+            <img class="event__type-icon" width="17" height="17" src="img/icons/${type}.png" alt="Event type icon">
           </label>
           <input class="event__type-toggle  visually-hidden" id="event-type-toggle-1" type="checkbox">
           <div class="event__type-list">
@@ -97,26 +80,26 @@ export const createFormEditTemplate = (point) => {
         </div>
         <div class="event__field-group  event__field-group--destination">
           <label class="event__label  event__type-output" for="event-destination-1">
-          ${point.offer.type}
+          ${type}
           </label>
-          <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${point.destination.name}" list="destination-list-1">
+          <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${name}" list="destination-list-1">
           <datalist id="destination-list-1">
             ${createDestinationDatalistTemplate(DESTINATIONS)}
           </datalist>
         </div>
         <div class="event__field-group  event__field-group--time">
           <label class="visually-hidden" for="event-start-time-1">From</label>
-          <input class="event__input  event__input--time" id="event-start-time-1" type="text" name="event-start-time" value="${dayjs(point.data.date.from).format('DD/MM/YY HH:mm')}">
+          <input class="event__input  event__input--time" id="event-start-time-1" type="text" name="event-start-time" value="${dayjs(from).format(DateFormat.FORMAT5)}">
           &mdash;
           <label class="visually-hidden" for="event-end-time-1">To</label>
-          <input class="event__input  event__input--time" id="event-end-time-1" type="text" name="event-end-time" value="${dayjs(point.data.date.to).format('DD/MM/YY HH:mm')}">
+          <input class="event__input  event__input--time" id="event-end-time-1" type="text" name="event-end-time" value="${dayjs(to).format(DateFormat.FORMAT5)}">
         </div>
         <div class="event__field-group  event__field-group--price">
           <label class="event__label" for="event-price-1">
             <span class="visually-hidden">Price</span>
             &euro;
           </label>
-          <input class="event__input  event__input--price" id="event-price-1" type="text" name="event-price" value="${point.data.price}">
+          <input class="event__input  event__input--price" id="event-price-1" type="text" name="event-price" value="${price}">
         </div>
         <button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
         <button class="event__reset-btn" type="reset">Delete</button>
@@ -125,10 +108,10 @@ export const createFormEditTemplate = (point) => {
         </button>
       </header>
       <section class="event__details">
-      ${createOptionOffersTemplate(point.offer.options)}
+      ${createOptionOffersTemplate(options)}
         <section class="event__section  event__section--destination">
           <h3 class="event__section-title  event__section-title--destination">Destination</h3>
-          <p class="event__destination-description">${point.destination.description}</p>
+          <p class="event__destination-description">${description}</p>
         </section>
       </section>
     </form>

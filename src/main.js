@@ -13,35 +13,35 @@ import {generatePoint} from './mock/point.js';
 
 const points = new Array(POINT_COUNT).fill().map(generatePoint);
 
-const elem_position = {
-  BEFORE_BEGIN: 'beforebegin',
-  AFTER_BEGIN: 'afterbegin',
-  BEFORE_END: 'beforeend',
-  AFTER_END: 'afterend',
+const InsertPlace = {
+  BeforeBegin: 'beforebegin',
+  AfterBegin: 'afterbegin',
+  BeforeEnd: 'beforeend',
+  AfterEnd: 'afterend',
 };
 
 const siteHeaderElement = document.querySelector('.page-header');
 const tripMainElement = siteHeaderElement.querySelector('.trip-main');
-render(tripMainElement, createTripInfoTemplate(points.slice(2)), elem_position.AFTER_BEGIN);
+render(tripMainElement, createTripInfoTemplate(points.slice(2)), InsertPlace.AfterBegin);
 
 const menuElement = siteHeaderElement.querySelector('.trip-controls__navigation');
-render(menuElement, createMenuTemplate(), elem_position.BEFORE_END);
+render(menuElement, createMenuTemplate(), InsertPlace.BeforeEnd);
 
 const tripCostElement = siteHeaderElement.querySelector('.trip-info');
-render(tripCostElement, createTripCostTemplate(points.slice(2)), elem_position.BEFORE_END);
+render(tripCostElement, createTripCostTemplate(points.slice(2)), InsertPlace.BeforeEnd);
 
 const filtersElement = siteHeaderElement.querySelector('.trip-controls__filters');
-render(filtersElement, createFiltersTemplate(), elem_position.BEFORE_END);
+render(filtersElement, createFiltersTemplate(), InsertPlace.BeforeEnd);
 
 const mainElement = document.querySelector('.page-main');
 const tripEventsElement = mainElement.querySelector('.trip-events');
-render(tripEventsElement, createSortTemplate(), elem_position.BEFORE_END);
-render(tripEventsElement, createEventsListTemplate(), elem_position.BEFORE_END);
+render(tripEventsElement, createSortTemplate(), InsertPlace.BeforeEnd);
+render(tripEventsElement, createEventsListTemplate(), InsertPlace.BeforeEnd);
 
 const eventsListElement = tripEventsElement.querySelector('.trip-events__list');
-render(eventsListElement, createFormEditTemplate(points[0]), elem_position.BEFORE_END);
-render(eventsListElement, createFormAddTemplate(points[1]), elem_position.BEFORE_END);
+render(eventsListElement, createFormEditTemplate(points[0]), InsertPlace.BeforeEnd);
+render(eventsListElement, createFormAddTemplate(points[1]), InsertPlace.BeforeEnd);
 
 for (let i = 2; i < POINT_COUNT; i++) {
-  render(eventsListElement, createEventTemplate(points[i]), elem_position.BEFORE_END);
+  render(eventsListElement, createEventTemplate(points[i]), InsertPlace.BeforeEnd);
 }

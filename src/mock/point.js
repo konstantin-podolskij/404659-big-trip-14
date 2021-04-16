@@ -57,42 +57,41 @@ const timeMaxGap = {
   days: 30,
 };
 
-function generateRandomFutureDate(startDate) {
+const generateRandomFutureDate = (startDate) => {
   return dayjs(startDate)
     .add(getRandomInteger(0, timeMaxGap.days), 'day')
     .add(getRandomInteger(0, timeMaxGap.hours), 'hour')
     .add(getRandomInteger(0, timeMaxGap.minutes), 'minute')
-    .add(getRandomInteger(0, timeMaxGap.seconsds), 'second')
-    .format('YYYY-MM-DD HH:mm:ss');
-}
+    .add(getRandomInteger(0, timeMaxGap.seconsds), 'second');
+};
 
-function generatePhotos(photoSettings) {
+const generatePhotos = (photoSettings) => {
   const randomIndex = getRandomInteger(photoSettings.minQuantity, photoSettings.maxQuantity);
   const photos = new Array(randomIndex).fill().map(() => photoSettings.src + getRandomInteger(0, photoSettings.maxSrcNumber));
 
   return photos;
-}
+};
 
-function generateOptions(options) {
-  const randomQuantity = getRandomInteger(0, options.length - 1);
+const generateOptions = (options) => {
+  const randomQuantity = getRandomElement(options);
   const randomOptions = new Array(randomQuantity).fill().map(() => getRandomElement(options));
 
   return randomOptions;
-}
+};
 
-function generateDescription() {
+const generateDescription = () => {
   const mockTexts = MOCK_TEXT.split('.');
   const sentenceCount = getRandomInteger(descriptionSettings.sentenceMin, descriptionSettings.sentenceMax);
   let description = '';
 
-  for (let i = 1; i <= sentenceCount; i++) {
+  for (let i = descriptionSettings.sentenceMin; i <= sentenceCount; i++) {
     description += getRandomElement(mockTexts) + '.';
   }
 
   return description;
-}
+};
 
-function generateDate() {
+const generateDate = () => {
   const dateFrom = generateRandomFutureDate();
   const dateTo = generateRandomFutureDate(dateFrom);
 
@@ -102,9 +101,9 @@ function generateDate() {
   };
 
   return date;
-}
+};
 
-export const generatePoint= () => {
+export const generatePoint = () => {
   return {
     offer:{
       type: getRandomElement(TYPES),

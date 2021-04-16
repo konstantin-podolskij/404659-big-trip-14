@@ -1,15 +1,23 @@
-function calcTripCost(points) {
+const calcTripCost = (points) => {
   let tripCost = 0;
   points.forEach((point) => {
-    const {offer, data} = point;
-    const offersPrice = offer.options.reduce((sumPrice, currentOption) => {
+    const {
+      offer: {
+        options,
+      },
+      data: {
+        price,
+      },
+    } = point;
+
+    const offersPrice = options.reduce((sumPrice, currentOption) => {
       return sumPrice + currentOption.price;
     }, 0);
-    tripCost += data.price + offersPrice;
+    tripCost += price + offersPrice;
   });
 
   return tripCost;
-}
+};
 
 export const createTripCostTemplate = (points) => {
   return `<p class="trip-info__cost">
