@@ -1,5 +1,21 @@
-export const renderTemplate = (container, template, place) => {
-  container.insertAdjacentHTML(place, template);
+import {InsertPlace} from './constants.js';
+
+export const renderElement = (container, element, place) => {
+  switch (place) {
+    case InsertPlace.AFTER_BEGIN:
+      container.prepend(element);
+      break;
+    case InsertPlace.BEFORE_END:
+      container.append(element);
+      break;
+   }
+ };
+
+export const createElement = (template) => {
+  const newElement = document.createElement('div');
+  newElement.innerHTML = template;
+
+  return newElement.firstChild;
 };
 
 export const getRandomInteger = (a = 0, b = 1) => {
