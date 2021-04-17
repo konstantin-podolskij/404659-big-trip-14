@@ -3,8 +3,9 @@ import {DESTINATIONS} from '../utils/constants.js';
 import {DateFormat} from '../utils/constants.js';
 import {createDestinationDatalistTemplate} from '../view/destinations-list.js';
 import {createOptionOffersTemplate} from '../view/option.js';
+import {createElement, getRandomInteger} from '../utils/utils.js';
 
-export const createFormEditTemplate = (point) => {
+const createPointEditTemplate = (point) => {
   const {
     offer: {
       type,
@@ -117,3 +118,27 @@ export const createFormEditTemplate = (point) => {
     </form>
   </li>`;
 };
+
+export default class PointEdit {
+  constructor(point) {
+    this._point = point;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createPointEditTemplate(this._point);
+  }
+
+  getElement() {
+    if (!this._element) {
+      return createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+
+}

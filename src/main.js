@@ -4,9 +4,9 @@ import TripCostView from './view/trip-cost';
 import FiltersView from './view/filters.js';
 import SortingView from './view/sort.js';
 import EventsListView from './view/events-list.js';
-import {createEventTemplate} from './view/event.js';
-import {createFormAddTemplate} from './view/point-create.js';
-import {createFormEditTemplate} from './view/point-edit.js';
+import PointView from './view/point.js';
+import NewPointView from './view/point-create.js';
+import PointEditView from './view/point-edit.js';
 import {renderElement} from './utils/utils.js';
 import {POINT_COUNT, InsertPlace} from './utils/constants.js';
 import {generatePoint} from './mock/point.js';
@@ -39,9 +39,9 @@ renderElement(tripEventsElement, new SortingView().getElement(), InsertPlace.BEF
 renderElement(tripEventsElement, new EventsListView().getElement(), InsertPlace.BEFORE_END);
 
 const eventsListElement = tripEventsElement.querySelector('.trip-events__list');
-//renderTemplate(eventsListElement, createFormEditTemplate(points[0]), InsertPlace.BEFORE_END);
-//renderTemplate(eventsListElement, createFormAddTemplate(points[1]), InsertPlace.BEFORE_END);
+renderElement(eventsListElement, new PointEditView(points[0]).getElement(), InsertPlace.BEFORE_END);
+renderElement(eventsListElement, new NewPointView(points[1]).getElement(), InsertPlace.BEFORE_END);
 
 for (let i = 2; i < POINT_COUNT; i++) {
-  //renderTemplate(eventsListElement, createEventTemplate(points[i]), InsertPlace.BEFORE_END);
+  renderElement(eventsListElement, new PointView(points[i]).getElement(), InsertPlace.BEFORE_END);
 }
