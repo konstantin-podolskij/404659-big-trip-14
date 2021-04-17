@@ -3,7 +3,7 @@ import TripInfoView from './view/trip-info.js';
 import TripCostView from './view/trip-cost';
 import FiltersView from './view/filters.js';
 import SortingView from './view/sort.js';
-import {createEventsListTemplate} from './view/events-list.js';
+import EventsListView from './view/events-list.js';
 import {createEventTemplate} from './view/event.js';
 import {createFormAddTemplate} from './view/point-create.js';
 import {createFormEditTemplate} from './view/point-edit.js';
@@ -36,7 +36,7 @@ renderElement(filtersElement, new FiltersView().getElement(), InsertPlace.BEFORE
 const mainElement = document.querySelector('.page-main');
 const tripEventsElement = mainElement.querySelector('.trip-events');
 renderElement(tripEventsElement, new SortingView().getElement(), InsertPlace.BEFORE_END);
-//renderTemplate(tripEventsElement, createEventsListTemplate(), InsertPlace.BEFORE_END);
+renderElement(tripEventsElement, new EventsListView().getElement(), InsertPlace.BEFORE_END);
 
 const eventsListElement = tripEventsElement.querySelector('.trip-events__list');
 //renderTemplate(eventsListElement, createFormEditTemplate(points[0]), InsertPlace.BEFORE_END);
