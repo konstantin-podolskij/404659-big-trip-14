@@ -1,4 +1,4 @@
-import {createElement} from '../utils/utils.js'
+import {createElement} from '../utils/utils.js';
 
 const createMainMenuTemplate = () => {
   return `<nav class="trip-controls__trip-tabs  trip-tabs">

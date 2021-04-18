@@ -3,7 +3,7 @@ import {DESTINATIONS} from '../utils/constants.js';
 import {DateFormat} from '../utils/constants.js';
 import {createDestinationDatalistTemplate} from '../view/destinations-list.js';
 import {createOptionOffersTemplate} from '../view/option.js';
-import {createElement, getRandomInteger} from '../utils/utils.js';
+import {createElement} from '../utils/utils.js';
 
 const createPointEditTemplate = (point) => {
   const {
@@ -131,7 +131,7 @@ export default class PointEdit {
 
   getElement() {
     if (!this._element) {
-      return createElement(this.getTemplate());
+      this._element = createElement(this.getTemplate());
     }
 
     return this._element;

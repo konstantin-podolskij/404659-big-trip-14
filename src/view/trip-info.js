@@ -5,7 +5,7 @@ const DESTINATION_POINTS_LIMIT = 3;
 
 const createDatesTemplate = (points) => {
   return `${dayjs(points[0].data.date.from).format('MMM DD')}&nbsp;&mdash;&nbsp;${dayjs(points[points.length -1].data.date.from).format('MMM DD')}`;
-}
+};
 
 const createDestinationsTemplate = (points) => {
   if (points.length > DESTINATION_POINTS_LIMIT) {
@@ -14,9 +14,9 @@ const createDestinationsTemplate = (points) => {
   const destinations = points.map((point) => {
     return point.destination.name;
   });
-  
+
   return (destinations.join('&nbsp;&mdash;&nbsp;'));
-}
+};
 
 const createTripInfoTemplate = (points) => {
   return `<section class="trip-main__trip-info  trip-info">
@@ -43,7 +43,7 @@ export default class TripInfo {
     if (!this._element) {
       this._element = createElement(this.getTemplate());
     }
-    
+
     return this._element;
   }
 
