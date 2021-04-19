@@ -10,3 +10,9 @@ export const DateFormat = {
   FORMAT4: 'HH:mm',
   FORMAT5: 'DD/MM/YY HH:mm',
 };
+export const InsertPlace = {
+  BEFORE_BEGIN: 'beforebegin',
+  AFTER_BEGIN: 'afterbegin',
+  BEFORE_END: 'beforeend',
+  AFTER_END: 'afterend',
+};

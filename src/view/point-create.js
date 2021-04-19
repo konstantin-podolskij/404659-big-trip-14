@@ -1,14 +1,14 @@
 import dayjs from 'dayjs';
-import {DESTINATIONS} from '../utils/constants.js';
-import {DateFormat} from '../utils/constants.js';
+import {DESTINATIONS, DateFormat} from '../utils/constants.js';
 import {createDestinationDatalistTemplate} from '../view/destinations-list.js';
 import {createOptionOffersTemplate} from '../view/option.js';
+import {createElement} from '../utils/utils.js';
 
 const createPicturesTemplate = (pictures) => {
   return pictures.map((picture) => `<img class="event__photo" src="${picture}" alt="Event photo">`).join('');
 };
 
-export const createFormAddTemplate = (point) => {
+const createNewPointTemplate = (point) => {
   const {
     offer: {
       type,
@@ -124,3 +124,26 @@ export const createFormAddTemplate = (point) => {
     </form>
   </li>`;
 };
+
+export default class NewPoint {
+  constructor(point) {
+    this._point = point;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createNewPointTemplate(this._point);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
