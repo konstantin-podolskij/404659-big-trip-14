@@ -14,10 +14,7 @@ import {generatePoint} from './mock/point.js';
 const points = new Array(POINT_COUNT).fill().map(generatePoint);
 
 points.sort((point1, point2) => {
-  if (point1.data.date.from < point2.data.date.from) {
-    return -1;
-  }
-  return 1;
+  return point1.data.date.from - point2.data.date.from;
 });
 
 const renderPoint = (point) => {

@@ -8,7 +8,9 @@ const createDatesTemplate = (points) => {
 
 const createDestinationsTemplate = (points) => {
   if (points.length > DESTINATION_POINTS_LIMIT) {
-    return `${points[0].destination.name}${ROUTE_SYMBOL}...${ROUTE_SYMBOL}${points[points.length -1].destination.name}`;
+    let destinationNameFrom = points[0].destination.name;
+    let destinationNameTo = points[points.length -1].destination.name;
+    return `${destinationNameFrom}${ROUTE_SYMBOL}...${ROUTE_SYMBOL}${destinationNameTo}`;
   }
   const destinations = points.map((point) => {
     return point.destination.name;
