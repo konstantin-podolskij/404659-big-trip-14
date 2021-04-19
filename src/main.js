@@ -21,24 +21,36 @@ const renderPoint = (point) => {
   const pointComponent = new PointView(point);
   const editPointComponent = new PointEditView(point);
 
-  const replacePointToEdit = () => {
-    eventsListElement.replaceChild(editPointComponent.getElement(), pointComponent.getElement());
+  const pressEscHandler = (evt) => {
+    if (evt.key === 'Escape' || evt.key === 'Esc') {
+      replaceEditToPoint();
+      document.removeEventListener('keydown', pressEscHandler);
+    }
   };
 
-  const replaceEditToPoint = (evt) => {
-    evt.preventDefault();
+  const replacePointToEdit = () => {
+    eventsListElement.replaceChild(editPointComponent.getElement(), pointComponent.getElement());
+    document.addEventListener('keydown', pressEscHandler);
+  };
+
+  const replaceEditToPoint = () => {
     eventsListElement.replaceChild(pointComponent.getElement(), editPointComponent.getElement());
+    document.addEventListener('keydown', pressEscHandler);
   };
 
   pointComponent.getElement().querySelector('.event__rollup-btn').addEventListener('click', replacePointToEdit);
-  editPointComponent.getElement().querySelector('form').addEventListener('submit', replaceEditToPoint);
+  editPointComponent.getElement().querySelector('.event__rollup-btn').addEventListener('click', replaceEditToPoint);
+  editPointComponent.getElement().querySelector('form').addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    replaceEditToPoint();
+  });
 
   render(eventsListElement, pointComponent.getElement(), InsertPlace.BEFORE_END);
 };
 
 const siteHeaderElement = document.querySelector('.page-header');
 const tripMainElement = siteHeaderElement.querySelector('.trip-main');
-render(tripMainElement, new TripInfoView(points.slice(2)).getElement(), InsertPlace.AFTER_BEGIN);
+render(tripMainElement, new TripInfoView(points.slice(1)).getElement(), InsertPlace.AFTER_BEGIN);
 
 const menuElement = siteHeaderElement.querySelector('.trip-controls__navigation');
 render(menuElement, new MainMenuView().getElement(), InsertPlace.BEFORE_END);
@@ -55,7 +67,7 @@ render(tripEventsElement, new SortingView().getElement(), InsertPlace.BEFORE_END
 render(tripEventsElement, new EventsListView().getElement(), InsertPlace.BEFORE_END);
 
 const eventsListElement = tripEventsElement.querySelector('.trip-events__list');
-render(eventsListElement, new NewPointView(points[1]).getElement(), InsertPlace.BEFORE_END);
+render(eventsListElement, new NewPointView(points[0]).getElement(), InsertPlace.BEFORE_END);
 
 for (let i = 1; i < POINT_COUNT; i++) {
   renderPoint(points[i]);
