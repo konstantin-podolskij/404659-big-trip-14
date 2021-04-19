@@ -5,9 +5,7 @@ export const createOptionOffersTemplate = (options) => {
     return '';
   }
 
-  let optionsMarkup = '';
-
-  optionsMarkup = options.map((option, index) => {
+  const optionsMarkup = options.map((option, index) => {
     const isChecked  = getRandomInteger(0, 1) ? 'checked' : '';
     const id = `event-offer-${option.title.toLowerCase().split(' ').join('-')}-${index + 1}`;
 
