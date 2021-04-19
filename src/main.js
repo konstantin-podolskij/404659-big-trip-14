@@ -47,7 +47,7 @@ const menuElement = siteHeaderElement.querySelector('.trip-controls__navigation'
 render(menuElement, new MainMenuView().getElement(), InsertPlace.BEFORE_END);
 
 const tripCostElement = siteHeaderElement.querySelector('.trip-info');
-render(tripCostElement, new TripCostView(points.slice(2)).getElement(), InsertPlace.BEFORE_END);
+render(tripCostElement, new TripCostView(points.slice(1)).getElement(), InsertPlace.BEFORE_END);
 
 const filtersElement = siteHeaderElement.querySelector('.trip-controls__filters');
 render(filtersElement, new FiltersView().getElement(), InsertPlace.BEFORE_END);

@@ -1,10 +1,9 @@
 import dayjs from 'dayjs';
 import { createElement } from '../utils/utils.js';
-
-const DESTINATION_POINTS_LIMIT = 3;
+import {DESTINATION_POINTS_LIMIT, DateFormat} from '../utils/constants.js';
 
 const createDatesTemplate = (points) => {
-  return `${dayjs(points[0].data.date.from).format('MMM DD')}&nbsp;&mdash;&nbsp;${dayjs(points[points.length -1].data.date.from).format('MMM DD')}`;
+  return `${dayjs(points[0].data.date.from).format(DateFormat.MONTH_DAY)}&nbsp;&mdash;&nbsp;${dayjs(points[points.length -1].data.date.from).format(DateFormat.MONTH_DAY)}`;
 };
 
 const createDestinationsTemplate = (points) => {
