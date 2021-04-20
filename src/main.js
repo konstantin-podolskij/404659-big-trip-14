@@ -8,7 +8,7 @@ import PointView from './view/point.js';
 import NewPointView from './view/point-create.js';
 import PointEditView from './view/point-edit.js';
 import EmptyTripView from './view/empty-trip.js';
-import {render} from './utils/render.js';
+import {render, replace} from './utils/render.js';
 import {POINT_COUNT, InsertPlace} from './utils/constants.js';
 import {generatePoint} from './mock/point.js';
 
@@ -31,12 +31,14 @@ if (points.length) {
     };
 
     const replacePointToEdit = () => {
-      eventsListElement.replaceChild(editPointComponent.getElement(), pointComponent.getElement());
+      //eventsListElement.replaceChild(editPointComponent.getElement(), pointComponent.getElement());
+      replace(editPointComponent, pointComponent);
       document.addEventListener('keydown', pressEscHandler);
     };
 
     const replaceEditToPoint = () => {
-      eventsListElement.replaceChild(pointComponent.getElement(), editPointComponent.getElement());
+      //eventsListElement.replaceChild(pointComponent.getElement(), editPointComponent.getElement());
+      replace(pointComponent, editPointComponent);
       document.addEventListener('keydown', pressEscHandler);
     };
 

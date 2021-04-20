@@ -130,7 +130,7 @@ export default class PointEdit extends AbstractView {
   getTemplate() {
     return createPointEditTemplate(this._point);
   }
-  
+
   _formSubmitHandler(evt) {
     evt.preventDefault();
     this._callback.formSubmit();
