@@ -80,4 +80,3 @@ if (points.length) {
 
   render(tripEventsElement, new EmptyTripView().getElement(), InsertPlace.AFTER_BEGIN);
 }
-
