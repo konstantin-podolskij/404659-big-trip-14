@@ -9,6 +9,7 @@ import NewPointView from './view/point-create.js';
 import PointEditView from './view/point-edit.js';
 import EmptyTripView from './view/empty-trip.js';
 import {render, replace} from './utils/render.js';
+import {isEscape} from './utils/utils.js';
 import {POINT_COUNT, InsertPlace} from './utils/constants.js';
 import {generatePoint} from './mock/point.js';
 
@@ -24,7 +25,7 @@ if (points.length) {
     const editPointComponent = new PointEditView(point);
 
     const pressEscHandler = (evt) => {
-      if (evt.key === 'Escape' || evt.key === 'Esc') {
+      if (isEscape(evt)) {
         replaceEditToPoint();
         document.removeEventListener('keydown', pressEscHandler);
       }

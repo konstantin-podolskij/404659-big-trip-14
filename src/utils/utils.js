@@ -10,3 +10,10 @@ export const getRandomElement = (arr) => {
 
   return arr[index];
 };
+
+export const isEscape = (evt) => {
+  if (evt.key === 'Escape' || evt.key === 'Esc'){
+    return true;
+  }
+  return false;
+};
