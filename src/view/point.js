@@ -22,16 +22,16 @@ const createPointTemplate = (point) => {
 
   return `<li class="trip-events__item">
     <div class="event">
-      <time class="event__date" datetime="${dayjs(data.date.from).format(DateFormat.FORMAT2)}">${dayjs(data.date.from).format(DateFormat.FORMAT3)}</time>
+      <time class="event__date" datetime="${dayjs(data.date.from).format(DateFormat.YEAR_MONTH_DAY)}">${dayjs(data.date.from).format(DateFormat.MONTH_DAY)}</time>
       <div class="event__type">
         <img class="event__type-icon" width="42" height="42" src="img/icons/${offer.type}.png" alt="Event type icon">
       </div>
       <h3 class="event__title">${offer.type} ${destination.name}</h3>
       <div class="event__schedule">
         <p class="event__time">
-          <time class="event__start-time" datetime="${dayjs(data.date.from).format(DateFormat.FORMAT1)}">${dayjs(data.date.from).format(DateFormat.FORMAT4)}</time>
+          <time class="event__start-time" datetime="${dayjs(data.date.from).format(DateFormat.ISO_FULL_DATE)}">${dayjs(data.date.from).format(DateFormat.HOUR_MINUTE)}</time>
           &mdash;
-          <time class="event__end-time" datetime="${dayjs(data.date.to).format(DateFormat.FORMAT1)}">${dayjs(data.date.to).format(DateFormat.FORMAT4)}</time>
+          <time class="event__end-time" datetime="${dayjs(data.date.to).format(DateFormat.ISO_FULL_DATE)}">${dayjs(data.date.to).format(DateFormat.HOUR_MINUTE)}</time>
         </p>
         <p class="event__duration">${timeDifference}</p>
       </div>

@@ -1,21 +1,22 @@
 import dayjs from 'dayjs';
 import { createElement } from '../utils/utils.js';
-
-const DESTINATION_POINTS_LIMIT = 3;
+import {DESTINATION_POINTS_LIMIT, ROUTE_SYMBOL, DateFormat} from '../utils/constants.js';
 
 const createDatesTemplate = (points) => {
-  return `${dayjs(points[0].data.date.from).format('MMM DD')}&nbsp;&mdash;&nbsp;${dayjs(points[points.length -1].data.date.from).format('MMM DD')}`;
+  return `${dayjs(points[0].data.date.from).format(DateFormat.MONTH_DAY)}${ROUTE_SYMBOL}${dayjs(points[points.length -1].data.date.from).format(DateFormat.MONTH_DAY)}`;
 };
 
 const createDestinationsTemplate = (points) => {
   if (points.length > DESTINATION_POINTS_LIMIT) {
-    return `${points[0].destination.name}&nbsp;&mdash;&nbsp;...&nbsp;&mdash;&nbsp;${points[points.length -1].destination.name}`;
+    const destinationNameFrom = points[0].destination.name;
+    const destinationNameTo = points[points.length -1].destination.name;
+    return `${destinationNameFrom}${ROUTE_SYMBOL}...${ROUTE_SYMBOL}${destinationNameTo}`;
   }
   const destinations = points.map((point) => {
     return point.destination.name;
   });
 
-  return (destinations.join('&nbsp;&mdash;&nbsp;'));
+  return (destinations.join(ROUTE_SYMBOL));
 };
 
 const createTripInfoTemplate = (points) => {
