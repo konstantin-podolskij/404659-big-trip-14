@@ -1,6 +1,13 @@
 import Abstract from '../view/abstract.js';
 import {InsertPlace} from './constants.js';
 
+export const createElement = (template) => {
+  const newElement = document.createElement('div');
+  newElement.innerHTML = template.trim();
+
+  return newElement.firstChild;
+};
+
 export const render = (container, child, place) => {
 
   if (container instanceof Abstract) {
