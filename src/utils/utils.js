@@ -1,16 +1,3 @@
-import {InsertPlace} from './constants.js';
-
-export const render = (container, element, place) => {
-  switch (place) {
-    case InsertPlace.AFTER_BEGIN:
-      container.prepend(element);
-      break;
-    case InsertPlace.BEFORE_END:
-      container.append(element);
-      break;
-  }
-};
-
 export const createElement = (template) => {
   const newElement = document.createElement('div');
   newElement.innerHTML = template.trim();
