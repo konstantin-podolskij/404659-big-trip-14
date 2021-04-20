@@ -40,12 +40,9 @@ if (points.length) {
       document.addEventListener('keydown', pressEscHandler);
     };
 
-    pointComponent.getElement().querySelector('.event__rollup-btn').addEventListener('click', replacePointToEdit);
-    editPointComponent.getElement().querySelector('.event__rollup-btn').addEventListener('click', replaceEditToPoint);
-    editPointComponent.getElement().querySelector('form').addEventListener('submit', (evt) => {
-      evt.preventDefault();
-      replaceEditToPoint();
-    });
+    pointComponent.setRollUpClickHandler(replacePointToEdit);
+    editPointComponent.setRollUpClickHandler(replaceEditToPoint);
+    editPointComponent.setFormSubmitHandler(replaceEditToPoint);
 
     render(eventsListElement, pointComponent, InsertPlace.BEFORE_END);
   };
