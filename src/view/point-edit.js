@@ -3,7 +3,7 @@ import {DESTINATIONS} from '../utils/constants.js';
 import {DateFormat} from '../utils/constants.js';
 import {createDestinationDatalistTemplate} from '../view/destinations-list.js';
 import {createOptionOffersTemplate} from '../view/option.js';
-import {createElement} from '../utils/utils.js';
+import AbstractView from './abstract.js';
 
 const createPointEditTemplate = (point) => {
   const {
@@ -119,26 +119,35 @@ const createPointEditTemplate = (point) => {
   </li>`;
 };
 
-export default class PointEdit {
+export default class PointEdit extends AbstractView {
   constructor(point) {
+    super();
     this._point = point;
-    this._element = null;
+    this._formSubmitHandler = this._formSubmitHandler.bind(this);
+    this._rollUpClickHandler = this._rollUpClickHandler.bind(this);
   }
 
   getTemplate() {
     return createPointEditTemplate(this._point);
   }
 
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
+  _formSubmitHandler(evt) {
+    evt.preventDefault();
+    this._callback.formSubmit();
   }
 
-  removeElement() {
-    this._element = null;
+  setFormSubmitHandler(callback) {
+    this._callback.formSubmit = callback;
+    this.getElement().querySelector('form').addEventListener('submit', this._formSubmitHandler);
   }
 
+  _rollUpClickHandler(evt) {
+    evt.preventDefault();
+    this._callback.rollUpClick();
+  }
+
+  setRollUpClickHandler(callback) {
+    this._callback.rollUpClick = callback;
+    this.getElement().querySelector('.event__rollup-btn').addEventListener('click', this._rollUpClickHandler);
+  }
 }
